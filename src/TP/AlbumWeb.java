@@ -1,10 +1,10 @@
 package TP;
 
 public class AlbumWeb extends Album{
-	private int _codigoPromocional;
+	private boolean _codigoPromocionalUsado;
 	
 	public AlbumWeb() {
-		_codigoPromocional = 555444333;
-		_premioFinal = "Camiseta de la selección";
+		_codigoPromocionalUsado = false;
+		_premioFinal = null;
 	}
 }

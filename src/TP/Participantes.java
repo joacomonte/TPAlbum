@@ -13,25 +13,24 @@ public class Participantes {
 	private Set<Figurita> _figuritasObtenidas;
 	private ArrayList<Figurita> _figuritasRepetidas;
 	
-	public Participantes(String nombre, int dni, int tipoAlbum) {
+	public Participantes(String nombre, int dni, String tipoAlbum) {
 		_nombre = nombre;
 		if(dni > 10000000 && dni < 99999999) {
 			_DNI = dni;
 		} else {
 			throw new RuntimeException("El dni ingresado es invalido");
 		}
-		if(tipoAlbum > 0 && tipoAlbum <= 3) {
-			_tipoAlbum = tipoAlbum;
-		} else {
-			throw new RuntimeException("El tipo de album solo puede ir del 1 al 3");
-		}
-		if(tipoAlbum == 1) {
+		if(tipoAlbum.equals("Tradicional")) {
 			_album = new AlbumTradicional();
 		} else {
-			if(tipoAlbum == 2) {
+			if(tipoAlbum.equals("Extendido")) {
 				_album = new AlbumExtendido();
 			} else {
-				_album = new AlbumWeb();
+				if(tipoAlbum.equals("Web")) {
+					_album = new AlbumWeb();
+				} else {
+					throw new RuntimeException("El tipo de album no existe");
+				}
 			}
 		}
 		//HACERLE HASHCODE Y EQUALS A LAS FIGURITAS, tambien a PARTICIPANTES.

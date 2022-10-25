@@ -2,7 +2,7 @@ package TP;
 
 import java.util.ArrayList;
 
-public abstract class Paises {
+public class Paises {
 	private String _nombrePais;
 	private ArrayList<FiguritaTradicional> _figusTradicional;
 	private int _rankingPais; //numeroIdentificatorio
@@ -19,7 +19,11 @@ public abstract class Paises {
 		_figusTradicional = new ArrayList<FiguritaTradicional>(12);
 	}
 	
-	public abstract void nuevaFiguritaTradicional(String nombreJugador, int numeroIdentif,	int rankingJug); //Creo la figurita tradicional y la meto al conjunto de jugadores;
+	public void nuevaFiguritaTradicional(String nombreJugador, int numeroIdentif,	int rankingJug) {
+		//Creo la figurita tradicional y la meto al conjunto de jugadores;
+		FiguritaTradicional figurita = new FiguritaTradicional(nombreJugador, numeroIdentif, rankingJug, _nombrePais, _rankingPais);
+		_figusTradicional.add(figurita);
+	}
 	
-	public abstract void nuevaFiguritaTop10(String nombreJugador, int numeroIdentif, int rankingJug, int añoMundial, boolean balonGanado); //Creo la figurita top10 del pais y la meto al conjunto de jugadores top 10;
+	//public abstract void nuevaFiguritaTop10(String nombreJugador, int numeroIdentif, int rankingJug, int añoMundial, boolean balonGanado); //Creo la figurita top10 del pais y la meto al conjunto de jugadores top 10;
 }
