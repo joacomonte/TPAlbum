@@ -1,17 +1,15 @@
 package TP;
 
 public class FiguritaTop10 extends Figurita {
-	private String _nombrePaisSedeMundial;
+	private String _sedeMundial;
 	private int _añoMundial;
-	private boolean _balonGanado; //true oro, false plata;
+	private int _balonGanado; //0 oro, 1 plata;
 	
-	public FiguritaTop10(String nombreJug, int numeroIdentif, int ranking, String nombrePaisSedeMundial, int añoMundial, boolean balonGanado, int rankingPais) {
-		super(nombreJug, numeroIdentif, ranking);
-		_nombrePaisSedeMundial = nombrePaisSedeMundial;
-		_añoMundial = añoMundial;
+	public FiguritaTop10(int numeroIdentif, int ranking, String sedeMundial, int balonGanado, int valorFinal) {
+		super(numeroIdentif, ranking, valorFinal);
+		_sedeMundial = sedeMundial;
 		_balonGanado = balonGanado;
-		_valorFinal = ranking + rankingPais;
-		if( _balonGanado == true) {
+		if( _balonGanado == 0) {
 			_valorFinal = _valorFinal * (1.2);
 		} else {
 			_valorFinal = _valorFinal * (1.1);
@@ -19,7 +17,7 @@ public class FiguritaTop10 extends Figurita {
 	}
 	
 	public String getNombPaisSede() {
-		return _nombrePaisSedeMundial;
+		return _sedeMundial;
 	}
 	
 	public int getAñoMundial() {

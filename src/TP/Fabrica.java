@@ -1,3 +1,5 @@
+package TP;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,11 +11,11 @@ public class Fabrica {
 
 
 	private Random random;
-
 	private String[] premiosInstantaneos;
 	private String[] paisesParticipantes;
 	private int lugaresPorPais;
 	private String[] listadoDeMundialesTop10;
+	private List<String> listadoDeMundialesTop10soloPais;
 	private Map<String, String[]> balonYPaisPorMundialTop10;
 	private Map<String, Integer> ranking;
 
@@ -25,6 +27,7 @@ public class Fabrica {
 		balonYPaisPorMundialTop10 = generarPaisesPorMundial();
 		ranking = generarRanking();
 		premiosInstantaneos = generarPremiosParaSorteoInstantaneo();
+		listadoDeMundialesTop10soloPais = separarListado(listadoDeMundialesTop10);
 	}
 	
 	////////////////////////////////////////////////////////////////////////
@@ -38,22 +41,60 @@ public class Fabrica {
 
 	Album crearAlbumWeb() {
         Album web = new AlbumWeb();
+        return web;
 	}
 
 	Album crearAlbumExtendido() {
 		Album extendido = new AlbumExtendido();
+		return extendido;
 	}
 
 	Album crearAlbumTradicional() {
 		Album tradicional = new AlbumTradicional();
+		return tradicional;
 	}
-
+	
+	Figurita crearFigurita() {
+		int numeroRanking = (int)(Math.random()*(11));
+		int numeroPais = (int)(Math.random()*(32));
+		Figurita nueva = new Figurita(numeroIdentificatorio(numeroRanking,numeroPais), numeroRanking, calcularValorBase(paisesParticipantes[numeroPais], numeroRanking));
+		return nueva;	
+	}
+	
+	Figurita crearFiguritaTop10() {
+		int tipoBalon = (int)(Math.random()*(2));
+		int numeroPais = (int)(Math.random()*(10));
+		String paisJugadorRanking = listadoDeMundialesTop10soloPais.get(numeroPais);
+		int rankingJugadorTop10 = tipoBalon+numeroPais;
+		Figurita nueva = new FiguritaTop10(rankingJugadorTop10, rankingJugadorTop10, listadoDeMundialesTop10[numeroPais], tipoBalon, calcularValorBase(paisJugadorRanking,rankingJugadorTop10));
+		return nueva;
+	}
+	
+	int numeroIdentificatorio(int a, int b) {
+		StringBuilder aux = new StringBuilder();
+		aux.append(a);
+		aux.append(b);
+		return Integer.parseInt(aux.toString());
+	}
+	
 	List<Figurita> generarSobre(int cantFigus) {
-		throw new RuntimeException("A Implementar");
+		List<Figurita> aux = new ArrayList<Figurita>();
+		int cont = 0;
+		while(cont <= cantFigus) {
+			aux.add(crearFigurita());
+			cont++;
+		}
+		return aux;
 	}		
 
 	List<Figurita> generarSobreTop10(int cantFigus) {
-		throw new RuntimeException("A Implementar");
+		List<Figurita> aux = new ArrayList<Figurita>();
+		int cont = 0;
+		while(cont <= cantFigus) {
+			aux.add(crearFiguritaTop10());
+			cont++;
+		}
+		return aux;
 	}
 
 
@@ -91,6 +132,16 @@ public class Fabrica {
 				"España '82",    "México '86", "Italia '90",  "Estados Unidos '94",
 				"Francia '98",   "Corea del Sur y Japón '02", "Alemania '06", 
 				"Sudáfrica '10", "Brasil '14", "Rusia '18" };
+	}
+	
+	private List<String> separarListado(String[] listado){
+		List<String> a = new ArrayList<String>();
+		for(int i = 0; i <= listado.length-1; i++) {
+			String[] aux = listado[i].split(" '");
+			a.add(aux[0]);
+		}
+		return a;
+		
 	}
 
 	private Map<String, String[]> generarPaisesPorMundial() {

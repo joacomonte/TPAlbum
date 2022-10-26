@@ -1,13 +1,12 @@
 package TP;
 
-public abstract class Figurita {
-	private String _nombre;
+public class Figurita {
 	private int _numeroIdentif;
 	private int _ranking;
 	protected double _valorFinal;
 	
-	public Figurita(String nombre, int numeroIdentif, int ranking) {
-		_nombre = nombre;
+	public Figurita(int numeroIdentif, int ranking, int valorBase) {
+		
 		if(numeroIdentif > 0) {
 			_numeroIdentif = numeroIdentif;
 		} else {
@@ -18,11 +17,7 @@ public abstract class Figurita {
 		} else {
 			throw new RuntimeException("El numero de ranking de cada figurita debe ir de 1 a 12");
 		}
-		_valorFinal = 0;
-	}
-	
-	public String getNombre() {
-		return _nombre;
+		_valorFinal = valorBase;
 	}
 	
 	public int getNumIdent() {

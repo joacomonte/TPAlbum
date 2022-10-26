@@ -7,4 +7,8 @@ public class AlbumWeb extends Album{
 		_codigoPromocionalUsado = false;
 		_premioFinal = null;
 	}
+	
+	public void usarCodigoPromocional() {
+		_codigoPromocionalUsado = true;
+	}
 }
